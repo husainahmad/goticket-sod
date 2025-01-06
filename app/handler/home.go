@@ -7,5 +7,5 @@ import (
 )
 
 func HomePage(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	responseJSON(w, http.StatusOK, dto.BaseResponse{StatusCode: http.StatusOK, Data: "Welcome!"})
+	ResponseJSON(w, http.StatusOK, dto.BaseResponse{StatusCode: http.StatusOK, Data: "Welcome!"})
 }

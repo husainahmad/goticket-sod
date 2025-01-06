@@ -18,13 +18,13 @@ func CreateTicket(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	var ticketDto dto.TicketDto
 
 	if err := json.NewDecoder(r.Body).Decode(&ticketDto); err != nil {
-		responseError(w, http.StatusBadRequest, dto.BaseResponse{StatusCode: http.StatusBadRequest,
+		ResponseError(w, http.StatusBadRequest, dto.BaseResponse{StatusCode: http.StatusBadRequest,
 			Data: "Invalid request payload"})
 		return
 	}
 
 	if err := ticketDto.Validate(); err != nil {
-		responseError(w, http.StatusBadRequest, dto.BaseResponse{StatusCode: http.StatusBadRequest,
+		ResponseError(w, http.StatusBadRequest, dto.BaseResponse{StatusCode: http.StatusBadRequest,
 			Data: MapErrorMessage(err)})
 		return
 	}
@@ -32,12 +32,12 @@ func CreateTicket(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	ticket := model.Ticket{TicketTitle: ticketDto.TicketTitle, TicketMsg: ticketDto.TicketMsg, UserId: ticketDto.UserId}
 
 	if err := db.Create(&ticket).Error; err != nil {
-		responseError(w, http.StatusInternalServerError, dto.BaseResponse{StatusCode: http.StatusInternalServerError,
+		ResponseError(w, http.StatusInternalServerError, dto.BaseResponse{StatusCode: http.StatusInternalServerError,
 			Data: "Failed to create ticket"})
 		return
 	}
 
-	responseJSON(w, http.StatusCreated, dto.BaseResponse{StatusCode: http.StatusCreated,
+	ResponseJSON(w, http.StatusCreated, dto.BaseResponse{StatusCode: http.StatusCreated,
 		Data: "Create ticket successfully"})
 }
 
@@ -46,7 +46,7 @@ func GetTicket(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	var request dto.BaseRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		responseError(w, http.StatusBadRequest, dto.BaseResponse{StatusCode: http.StatusBadRequest,
+		ResponseError(w, http.StatusBadRequest, dto.BaseResponse{StatusCode: http.StatusBadRequest,
 			Data: "Invalid request payload"})
 		return
 	}
@@ -59,7 +59,7 @@ func GetTicket(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	if err := db.Where(filterSql,
 		GetFilterValue(request.Filter)...).Limit(limit).Order(
 		GetSortValue(request.Sort)).Find(&tickets).Error; err != nil {
-		responseError(w, http.StatusInternalServerError, dto.BaseResponse{StatusCode: http.StatusInternalServerError,
+		ResponseError(w, http.StatusInternalServerError, dto.BaseResponse{StatusCode: http.StatusInternalServerError,
 			Data: "Failed to get all tickets"})
 		return
 	}
@@ -70,7 +70,7 @@ func GetTicket(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 			UserId: ticket.UserId, CreatedAt: ticket.CreatedAt, TicketStatus: enum.TicketStatus(ticket.TicketStatus).String()})
 	}
 
-	responseJSON(w, http.StatusOK, dto.BaseResponse{StatusCode: http.StatusOK, Data: ticketDtos})
+	ResponseJSON(w, http.StatusOK, dto.BaseResponse{StatusCode: http.StatusOK, Data: ticketDtos})
 }
 
 func GetFilterValue(filter dto.Filter) []interface{} {
