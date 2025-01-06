@@ -25,7 +25,7 @@ func CreateTicket(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	if err := ticketDto.Validate(); err != nil {
 		responseError(w, http.StatusBadRequest, dto.BaseResponse{StatusCode: http.StatusBadRequest,
-			Data: mapErrorMessage(err)})
+			Data: MapErrorMessage(err)})
 		return
 	}
 
@@ -53,12 +53,12 @@ func GetTicket(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	limit := util.Rounding{}.RoundHalfDownInt(request.PageSize)
 
-	var filterSql = mapDateFilter(request.Filter)
+	var filterSql = MapDateFilter(request.Filter)
 	var tickets []model.Ticket
 
 	if err := db.Where(filterSql,
-		getFilterValue(request.Filter)...).Limit(limit).Order(
-		getSortValue(request.Sort)).Find(&tickets).Error; err != nil {
+		GetFilterValue(request.Filter)...).Limit(limit).Order(
+		GetSortValue(request.Sort)).Find(&tickets).Error; err != nil {
 		responseError(w, http.StatusInternalServerError, dto.BaseResponse{StatusCode: http.StatusInternalServerError,
 			Data: "Failed to get all tickets"})
 		return
@@ -73,7 +73,7 @@ func GetTicket(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	responseJSON(w, http.StatusOK, dto.BaseResponse{StatusCode: http.StatusOK, Data: ticketDtos})
 }
 
-func getFilterValue(filter dto.Filter) []interface{} {
+func GetFilterValue(filter dto.Filter) []interface{} {
 	switch filter.FilterType {
 	case enum.Between:
 		return []interface{}{filter.FilterValue, filter.FilterValue}
@@ -84,14 +84,14 @@ func getFilterValue(filter dto.Filter) []interface{} {
 	}
 }
 
-func getSortValue(sort dto.Sort) string {
+func GetSortValue(sort dto.Sort) string {
 	if sort.SortName != "" && sort.SortDir != "" {
 		return fmt.Sprintf("%s %s", sort.SortName, sort.SortDir)
 	}
 	return "id desc"
 }
 
-func mapDateFilter(filter dto.Filter) string {
+func MapDateFilter(filter dto.Filter) string {
 	filterType := map[enum.FilterType]string{
 		"before":  filter.FilterName + " < ?",
 		"after":   filter.FilterName + " > ?",
@@ -101,7 +101,7 @@ func mapDateFilter(filter dto.Filter) string {
 	return filterType[filter.FilterType]
 }
 
-func mapErrorMessage(err error) string {
+func MapErrorMessage(err error) string {
 
 	customMessage := map[string]string{
 		"TicketDto.TicketTitle.required": "The ticket_title is required.",
