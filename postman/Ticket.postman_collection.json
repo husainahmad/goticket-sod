@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"ticket_title\":\"1. Software is not working\",\n    \"ticket_msg\":\"1. <p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p>\",\n    \"user_id\":12\n}",
+					"raw": "{\n    \"ticket_title\": \"19. Software is not working\",\n    \"ticket_msg\": \"19. <p>Hello, please assist as i cannot take a screenshot, Lorem ipsum dolarsit amat, Lorem ipsum dolarsit amat, Lorem ipsum dolarsit amat. Lorem ipsum dolarsit amat. Lorem ipsum dolarsit amat</p>\",\n    \"user_id\": 12\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,7 +41,325 @@
 			"response": []
 		},
 		{
-			"name": "Filter",
+			"name": "Create with null ticket_title",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ticket_msg\":\"1. <p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p>\",\n    \"user_id\":12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create with null ticket_message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ticket_title\":\"1. Software is not working\",\n    \"user_id\":12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create with ticket_title less than 10",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ticket_title\":\"1.\",\n    \"ticket_msg\":\"1. <p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p>\",\n    \"user_id\":12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create with ticket_msg less than 100",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ticket_title\":\"1. Software is not working\",\n    \"ticket_msg\":\"1. <p>Hello, please assist as i cannot take a screenshot</p>\",\n    \"user_id\":12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create with user_id string",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ticket_title\":\"1. Software is not working\",\n    \"ticket_msg\":\"1. <p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p>\",\n    \"user_id\":\"12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fiter Before",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"filter\": {\n        \"filter_name\": \"created_at\",\n        \"filter_type\": \"before\",\n        \"filter_value\": \"2025-02-14\"\n    },\n    \"sort\": {\n        \"sort_name\": \"created_at\",\n        \"sort_dir\": \"asc\"\n    },\n    \"page_size\": 18\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter After",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"filter\": {\n        \"filter_name\": \"created_at\",\n        \"filter_type\": \"after\",\n        \"filter_value\": \"2024-12-14\"\n    },\n    \"sort\": {\n        \"sort_name\": \"created_at\",\n        \"sort_dir\": \"asc\"\n    },\n    \"page_size\": 18\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Between",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"filter\": {\n        \"filter_name\": \"created_at\",\n        \"filter_type\": \"between\",\n        \"filter_value\": \"2025-01-06\"\n    },\n    \"sort\": {\n        \"sort_name\": \"created_at\",\n        \"sort_dir\": \"asc\"\n    },\n    \"page_size\": 18\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sort 15",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"filter\": {\n        \"filter_name\": \"created_at\",\n        \"filter_type\": \"before\",\n        \"filter_value\": \"2025-02-14\"\n    },\n    \"sort\": {\n        \"sort_name\": \"created_at\",\n        \"sort_dir\": \"asc\"\n    },\n    \"page_size\": 15\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sort 18",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -80,7 +398,7 @@
 		{
 			"name": "Home",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -88,24 +406,15 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"ticket_title\":\"1. Software is not working\",\n    \"ticket_msg\":\"1. <p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p><p>Hello, please assist as i cannot take a screenshot</p>\",\n    \"user_id\":12\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:3000/ticket",
+					"raw": "http://localhost:3000/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"ticket"
+						""
 					]
 				}
 			},
